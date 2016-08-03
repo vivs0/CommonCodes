@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery, Ajax and Servlet/JSP integration example</title>
+
+<script src="jquery-1.9.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		type     : 'get',
+		url      : 'GetStates',
+		data     : {get_param:'New'},
+		dataType : 'html',
+		success  : function(responseText)
+		{			
+			$('#ajaxGetUserServletResponse').text(responseText);
+			$.each(JSON.parse(responseText),function(index,element)
+			{
+				$('#state').append($('<option>',{value:element.id,text:element.Name}));
+			});
+		}
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#state').change(function(){
+		$.ajax({
+			url		   : 'GetStates',
+			data	   : {get_param: $('#state').find(":selected").val()},
+			datatype   : 'html',
+			success	   : function(CityData)
+			{
+				$('#ajaxGetUserServletResponse').text(CityData);
+				$('#city').empty().append($('<option>').val('-1').text('select city..'));
+				$.each(JSON.parse(CityData),function(index,element){
+					$('#city').append($('<option>',{value:element.id,text:element.Name}));
+				});
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+
+	<form>
+		<select id = "state">
+			<option value="-1">Select State</option>
+		</select>
+		<select id = "city">
+			<option value="-1">Select City</option>
+		</select>		
+		
+	</form>
+	<br>
+	<br>
+
+	<strong>Ajax Response</strong>:
+	<div id="ajaxGetUserServletResponse"></div>
+</body>
+</html>

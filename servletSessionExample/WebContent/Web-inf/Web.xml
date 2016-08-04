@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>servletTutorial</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+  <servlet>
+    <servlet-name>Registeration</servlet-name>
+    <servlet-class>Registeration.RegisterNew</servlet-class>
+    <init-param>
+      <param-name>dbuser</param-name>
+      <param-value>hms</param-value>
+    </init-param>
+    <init-param>
+      <param-name>dbpass</param-name>
+      <param-value>2611798</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registeration</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>UserSection</servlet-name>
+  	<servlet-class>Registeration.User</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserSection</servlet-name>
+  	<url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>driver</param-name>
+    <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:oracle:thin:@127.0.0.1:1521:xe</param-value>
+  </context-param>
+</web-app>
